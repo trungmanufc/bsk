@@ -19,12 +19,18 @@ class BowlingGame:
     def calculate_score(self) -> int:
         score = 0
         is_spare = False
-        for frame in self._frames:
+        is_strike = False;
+        for frame in self._frame:
+            if is_strike:
+                score = score + frame.get_first_throw() + frame.get_second_throw()
+                is_strike = False
             if is_spare:
                 score = score + frame.get_first_throw() + frame.get_second_throw();
                 is_spare = False;
             if frame.is_spare():
                 is_spare = True;
+            if frame.is_strike():
+                is_strike = True;
         pass
 
     def set_first_bonus_throw(self, bonus_throw: int) -> None:
